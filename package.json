@@ -1,0 +1,21 @@
+{
+  "name": "Tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "custom-electron-titlebar": "^3.2.7"
+  },
+  "devDependencies": {
+    "electron": "^14.0.1",
+    "electron-packager": "^15.4.0",
+    "electron-reload": "^2.0.0-alpha.1"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

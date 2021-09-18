@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/style.css">
+  <title>DevTools</title>
+</head>
+<body>
+
+  <div class="titlebar" draggable="true">
+  </div>
+
+  <div class="buttons">
+    <button onclick='window.close()'>X</button>
+  </div>
+
+  <div class="tab">
+    <button class="tablinks" name="dashboard">Dashboard</button>
+
+    <button class="tablinks" name="imageshrink" data-url="https://tinypng.com/">TinyPNG</button>
+    <button class="tablinks" name="videoshrink" data-url="https://www.onlineconverter.com/">Converter</button>
+    <button class="tablinks" name="fontgenerator" data-url="https://transfonter.org/">Transfonter</button>
+    <button class="tablinks" name="imagegenerator" data-url="https://dummyimage.com/">Dummy Image Generator</button>
+    <button class="tablinks" name="svgicons" data-url="https://heroicons.com/">SVG Icons</button>
+    <button class="tablinks" name="API" data-url="https://public-apis.io/">Public APIs</button>
+    <button class="tablinks" name="htmlentities" data-url="https://dev.w3.org/html5/html-author/charref">HTML entities</button>
+    <button class="tablinks" name="htmlrealtime" data-url="https://htmledit.squarefree.com/">HTML Real-time</button>
+
+
+
+  </div>
+
+  <div class="tabcontent">
+    <dashboard></dashboard>
+    <content></content>
+    <webview src="about:blank"></webview>
+    <view></view>
+  </div>
+
+
+  <style>
+    content{
+      position:fixed;
+      top:20px;
+      left:15px;
+      z-index: 1;
+      color:#ffffff;
+      text-align: center;
+    }
+    webview{
+      position:fixed;
+      top:20px;
+      right:0;
+      height:100vh;
+      width:80%;
+    }
+  </style>
+
+  <script>
+   
+    let tab = document.querySelector('.tab')
+    let tabBtns = tab.querySelectorAll('button')
+    let content = document.querySelector('content')
+    let dashboard = document.querySelector('dashboard')
+    let webview = document.querySelector('webview')
+    let titlebar = document.querySelector('.titlebar')
+
+    let delay = 100
+
+
+    window.onload = function(){
+      titlebar.innerText = document.title + ' - by drelocatelli'
+      home()
+    }
+
+    titlebar.ondrag = function(e){
+      e = e || window.event;
+      e.preventDefault()
+      let positionY = event.clientY
+      let positionX = event.clientX
+
+      moveWindow(positionX, positionY)
+
+
+    }
+
+    titlebar.ondragenter = function(e){
+      e = e || window.event;
+      e.preventDefault()
+      let positionY = event.clientY
+      let positionX = event.clientX
+
+      moveWindow(positionX, positionY)
+
+
+    }
+
+    titlebar.ondragend = function(e){
+      e = e || window.event;
+      e.preventDefault()
+      let positionY = event.clientY
+      let positionX = event.clientX
+      console.log(event)
+
+      moveWindow(positionX, positionY)
+
+
+    }
+
+    function moveWindow(posx, posy){
+        window.moveTo(posx, posy)
+    }
+
+    function home(){
+      webview.style.display = "none"
+      dashboard.style.display = 'block'
+      content.style.display = 'none'
+      return dashboard.innerHTML = `<h1>Welcome to DevTools</h1>Select your tool. <br><br>Github: drelocatelli`
+    }
+
+    tabBtns.forEach(btn => {
+      btn.onclick = function(e){
+      content.style.display = 'none'
+
+      // setting layout
+        switch(btn.name){
+          case 'dashboard':
+            home()
+          break;
+          default:
+            dashboard.style.display = 'none'
+            setTimeout(() =>{
+              webview.style.display = 'flex'
+              content.innerHTML = `<h3>${e.target.innerText}</h3>`
+
+            }, delay)
+        }
+
+        // setting webview
+
+        switch(btn.name){
+          case 'dashboard':
+          console.log('home')
+          break;
+          default:
+            setTimeout(() =>{
+                let path = (btn.dataset.url)
+                console.log(path)
+                webview.loadURL(path)
+            }, delay)
+        }
+      }
+    })
+  </script>
+  
+</body>
+</html>
