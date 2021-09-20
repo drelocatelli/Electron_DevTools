@@ -4,7 +4,9 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
-    "custom-electron-titlebar": "^3.2.7"
+    "custom-electron-titlebar": "^3.2.7",
+    "electron-drag": "^2.0.0",
+    "interactjs": "^1.10.11"
   },
   "devDependencies": {
     "electron": "^14.0.1",

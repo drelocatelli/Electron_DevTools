@@ -19,6 +19,7 @@ function changeWindow (path, dimensions, attr) {
         title: 'DevTools',
         frame: false,
         alwaysOnTop: false,
+        
         titleBarOverlay: {
             color: '#2f3241',
     symbolColor: '#74b1be'
@@ -27,7 +28,8 @@ function changeWindow (path, dimensions, attr) {
           nodeIntegration: true,
           webviewTag: true,
           enableRemoteModule: true,
-          nativeWindowOpen: true
+          nativeWindowOpen: true,
+          contextIsolation:false,
       }
       
     })
@@ -35,6 +37,7 @@ function changeWindow (path, dimensions, attr) {
     // win.setMenu(null)
     win.setResizable(false)
     win.loadURL(`file://${__dirname}/${path}`)
+
 }
 
 

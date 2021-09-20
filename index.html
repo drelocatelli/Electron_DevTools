@@ -9,8 +9,7 @@
 </head>
 <body>
 
-  <div class="titlebar" draggable="true">
-  </div>
+  <header class="titlebar"></header>
 
   <div class="buttons">
     <button onclick='window.close()'>X</button>
@@ -21,6 +20,7 @@
 
     <button class="tablinks" name="imageshrink" data-url="https://tinypng.com/">TinyPNG</button>
     <button class="tablinks" name="videoshrink" data-url="https://www.onlineconverter.com/">Converter</button>
+    <button class="tablinks" name="videoshrink" data-url="https://www.online-convert.com/pt">Online-Convert</button>
     <button class="tablinks" name="fontgenerator" data-url="https://transfonter.org/">Transfonter</button>
     <button class="tablinks" name="imagegenerator" data-url="https://dummyimage.com/">Dummy Image Generator</button>
     <button class="tablinks" name="svgicons" data-url="https://heroicons.com/">SVG Icons</button>
@@ -67,50 +67,31 @@
     let webview = document.querySelector('webview')
     let titlebar = document.querySelector('.titlebar')
 
-    let delay = 100
+    const interact = require('interactjs')
 
+    const position = { x: 0, y: 0 }
+
+    interact('header').draggable({
+      listeners: {
+        move (event) {
+          position.x += event.dx
+          position.y += event.dy
+
+          moveWindow(position.x, position.y)
+
+        },
+      }
+    })
+
+    let delay = 100
 
     window.onload = function(){
       titlebar.innerText = document.title + ' - by drelocatelli'
       home()
     }
 
-    titlebar.ondrag = function(e){
-      e = e || window.event;
-      e.preventDefault()
-      let positionY = event.clientY
-      let positionX = event.clientX
-
-      moveWindow(positionX, positionY)
-
-
-    }
-
-    titlebar.ondragenter = function(e){
-      e = e || window.event;
-      e.preventDefault()
-      let positionY = event.clientY
-      let positionX = event.clientX
-
-      moveWindow(positionX, positionY)
-
-
-    }
-
-    titlebar.ondragend = function(e){
-      e = e || window.event;
-      e.preventDefault()
-      let positionY = event.clientY
-      let positionX = event.clientX
-      console.log(event)
-
-      moveWindow(positionX, positionY)
-
-
-    }
-
     function moveWindow(posx, posy){
-        window.moveTo(posx, posy)
+        window.moveBy(posx, posy)
     }
 
     function home(){
